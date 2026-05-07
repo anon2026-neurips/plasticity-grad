@@ -10,7 +10,7 @@ Code for reproducing experiments on the Random MNIST benchmark.
 # Unregularized (abrupt transitions)
 python mnist_abrupt.py --config random_mnist_config.json
 
-# Unregularized (smooth interpolation)
+# Interpolation
 python mnist_gradual.py --config random_mnist_config_smooth.json
 ```
 
