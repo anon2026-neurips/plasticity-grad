@@ -1,0 +1,19 @@
+{
+    "num_tasks": 100,
+    "num_classes":10,
+    "epochs_per_task":240,
+    "samples_per_class":512,
+    "batch_size":64,
+    "samples_per_class_test":0,
+    "dataset": "MNIST",
+    "lr": 1e-3,
+    "save_models":true,
+    "wandb":false,
+    "exp_name":"random_mnist",
+    "model_name":"mlp",
+    "baseline":"redo",
+    "svd_init":false,
+    "seed":800,
+    "from_checkpoint":"",
+    "timezone":"'America/Edmonton'"
+}
