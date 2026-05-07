@@ -1,64 +1,56 @@
-# Loss of Plasticity in Language Model
+# Loss of Plasticity in Language Models
 
-## How to run the experiments?
-`--config`: path to the config files containing basic hyperparameters such as learning rate
+Code for reproducing experiments on Random Seq2seq and Bigram Cipher tasks.
 
-`--smooth`: boolean operator determining whether to run with Task Sampling
+---
 
-### Random Seq2seq
+## Configuration
 
-**Unregularized**
+| Flag | Description |
+|---|---|
+| `--config` | Path to the config file containing hyperparameters (e.g., learning rate) |
+| `--smooth` | Enable task sampling for smooth transitions |
 
-`python trainer.py --config train_config.json`
+---
 
-**Task Sampling**
+## Random Seq2Seq
 
-`python trainer.py --config train_config_smooth.json --smooth`
+```bash
+# Unregularized
+python trainer.py --config train_config.json
 
-**Other mitigation methods**
+# Task Sampling
+python trainer.py --config train_config_smooth.json --smooth
+```
 
-Spectral Regularization
+### Baselines
 
-`baselines.py --config train_config.json --baseline spectral_reg --reg_strength 0.001`
+```bash
+python baselines.py --config train_config.json --baseline spectral_reg --reg_strength 0.001
+python baselines.py --config train_config.json --baseline shrink_perturb --shrink 0.5 --perturb 0.01
+python baselines.py --config train_config.json --baseline l2_reg --reg_strength 0.0000001
+python baselines.py --config train_config.json --baseline redo
+```
 
-Shrink&Perturb
+---
 
-`baselines.py --config train_config.json --baseline shrink_perturb --shrink 0.5 --perturb 0.01`
+## Bigram Cipher
 
-L2 Regularization
+> **Note:** The keyword `cipher` must be included in the `exp_name` field of the config file to run this task.
 
-`python baselines.py --config train_config.json --baseline l2_reg --reg_strength 0.0000001`
+```bash
+# Unregularized
+python trainer.py --config train_config_cipher.json
 
-ReDO
+# Task Sampling
+python trainer.py --config train_config_cipher_smooth.json --smooth
+```
 
-`python baselines.py --config train_config.json --baseline redo`
+### Baselines
 
-### Bigram Cipher
-
-Note that the keyword `'cipher'` must be included in the `'exp_name'` in the config files to run this task.
-
-**Unregularized**
-
-`python trainer.py --config train_config_cipher.json`
-
-**Task Sampling**
-
-`python trainer.py --config train_config_cipher_smooth.json --smooth`
-
-**Other mitigation methods**
-
-Spectral Regularization
-
-`baselines.py --config train_config_cipher_baselines.json --baseline spectral_reg --reg_strength 0.001`
-
-Shrink&Perturb
-
-`baselines.py --config train_config_cipher_baselines.json --baseline shrink_perturb --shrink 0.5 --perturb 0.01`
-
-L2 Regularization
-
-`python baselines.py --config train_config_cipher_baselines.json --baseline l2_reg --reg_strength 0.0000001`
-
-ReDO
-
-`python baselines.py --config train_config_cipher_baselines.json --baseline redo`
+```bash
+python baselines.py --config train_config_cipher_baselines.json --baseline spectral_reg --reg_strength 0.001
+python baselines.py --config train_config_cipher_baselines.json --baseline shrink_perturb --shrink 0.5 --perturb 0.01
+python baselines.py --config train_config_cipher_baselines.json --baseline l2_reg --reg_strength 0.0000001
+python baselines.py --config train_config_cipher_baselines.json --baseline redo
+```
